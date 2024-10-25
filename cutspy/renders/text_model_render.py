@@ -22,7 +22,7 @@ from cutspy_dom import (
 )
 
 @dataclass
-class PrintRender(AbstractRender):
+class TextModelRender(AbstractRender):
     def __init__(self):
         super().__init__()
         _objectiveBuffer: io.StringIO = field(default_factory=io.StringIO)
