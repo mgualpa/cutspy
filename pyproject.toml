@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cutspy"
+version = "0.1.0"
+authors = [{name = "Mariano Martín Gualpa", email = "mgualpa@gmail.com"}]
+license = {text = "The MIT License"}
+readme = "README.md"
+description = "One-dimensional Cutting Stock Problem tool for Python"
+keywords = ["cutspy", "CSP", "cutting stock", "artificial inteligence", "optimization"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+urls = {Homepage = "https://github.com/mgualpa/cutspy"}
+dependencies = ["matplotlib", "deap"]
+
+[tool.setuptools]
+packages = ["cutspy", "cutspy.*"]
+include-package-data = true
