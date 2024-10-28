@@ -32,3 +32,6 @@ dependencies = ["matplotlib", "deap"]
 [tool.setuptools]
 packages = ["cutspy", "cutspy.*"]
 include-package-data = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
