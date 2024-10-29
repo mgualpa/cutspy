@@ -1,25 +1,14 @@
-from abc import ABC
-from functools import singledispatchmethod
 import io
+from abc import ABC
 from dataclasses import dataclass, field
-from cutspy_dom import (
-    RenderableElement,
-    AbstractRender,
-    TypedDict,
-    Stock,
-    StocksList,
-    Part,
-    PartsList,
-    Cut,
-    PatternsList,
-    AbstractObjective,
-    MinimumCostObjective,
-    MaximizeIncomeObjective,
-    MinimizeScrapObjective,
-    AbstractMultiObjectiveList,
-    MultiObjectiveList,
-    CSPModel
-)
+from functools import singledispatchmethod
+
+from cutspy_dom import (AbstractMultiObjectiveList, AbstractObjective,
+                        AbstractRender, CSPModel, Cut, MaximizeIncomeObjective,
+                        MinimizeScrapObjective, MinimumCostObjective,
+                        MultiObjectiveList, Part, PartsList, PatternsList,
+                        RenderableElement, Stock, StocksList, TypedDict)
+
 
 @dataclass
 class TextModelRender(AbstractRender):
@@ -31,7 +20,7 @@ class TextModelRender(AbstractRender):
     @singledispatchmethod
     def render(self, element: RenderableElement):
         raise NotImplementedError("Render is not implemented.")
-    
+
     @render.register
     def _(self, element: Stock):
         pass
@@ -71,4 +60,3 @@ class TextModelRender(AbstractRender):
     @render.register
     def _(self, element: MultiObjectiveList):
         pass
-

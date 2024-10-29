@@ -9,7 +9,12 @@ authors = [{name = "Mariano Martín Gualpa", email = "mgualpa@gmail.com"}]
 license = {text = "The MIT License"}
 readme = "README.md"
 description = "One-dimensional Cutting Stock Problem tool for Python"
-keywords = ["cutspy", "CSP", "cutting stock", "artificial inteligence", "optimization"]
+keywords = ["cutspy", 
+            "CSP", 
+            "cutting stock", 
+            "artificial inteligence", 
+            "optimization"
+]
 classifiers = [
     "Development Status :: 1 - Planning",
     "Intended Audience :: Developers",
@@ -35,3 +40,6 @@ include-package-data = true
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[tool.black]
+line-length = 79

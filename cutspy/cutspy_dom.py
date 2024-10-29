@@ -1,9 +1,10 @@
-from dataclasses import dataclass, field
-from typing import TypeVar, Generic, Dict, Type
 from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
+from typing import Dict, Generic, Type, TypeVar
 
 
-class RenderableElement: ...
+class RenderableElement:
+    pass
 
 
 class AbstractRender(ABC):
@@ -40,7 +41,8 @@ class TypedDict(Generic[T]):
     def __setitem__(self, key: str, value: T) -> None:
         if not isinstance(value, self._item_type):
             raise TypeError(
-                f"Expected value of type {self._item_type.__name__}, but got {type(value).__name__}."
+                f"Expected value of type {self._item_type.__name__}, "
+                f"but got {type(value).__name__}."
             )
         self._data[key] = value
 
@@ -118,7 +120,8 @@ class PatternsList(TypedDict[Pattern], RenderableElement):
     def append(self, value):
         if not isinstance(value, Pattern):
             raise TypeError(
-                f"The value must be a Pattern instance, but it is {type(value)}."
+                f"The value must be a Pattern instance, "
+                f"but it is {type(value)}."
             )
         self[value.stock_name] = value
 
@@ -153,12 +156,13 @@ class MultiObjectiveList:
     def append(self, value):
         if not isinstance(value, AbstractObjective):
             raise TypeError(
-                f"The value must be an AbstractObjective instance, but it is {type(value)}."
+                f"The value must be an AbstractObjective instance, "
+                f"but it is {type(value)}."
             )
         if len(self) == 0:
             super.append(value)
         else:
-            raise ValueError(f"Not implemented multiobjective version.")
+            raise ValueError("Not implemented multiobjective version.")
 
 
 @dataclass(frozen=True)
@@ -168,11 +172,19 @@ class CSPModel(AbstractObjective):
     parts: PartsList = field(default_factory=PartsList)
     patterns: PatternsList = field(default_factory=PatternsList)
 
-    def add_stock(self, name: str, lenght: float, cost: float = 0, stock: int = 0):
+    def add_stock(
+        self,
+        name: str,
+        lenght: float,
+        cost: float = 0,
+        stock: int = 0,
+    ):
         s = Stock(name=name, lenght=lenght, cost=cost, stock=stock)
         self.stocks.append(s)
 
-    def add_part(self, name: str, lenght: float, demand: int, price: float = 0):
+    def add_part(
+        self, name: str, lenght: float, demand: int, price: float = 0
+    ):
         p = Part(name=name, lenght=lenght, demand=demand, price=price)
         self.parts.append(p)
 
@@ -192,9 +204,9 @@ class CSPModel(AbstractObjective):
                     cuts_dict[f.name] = num_cuts
                     patterns.append({"stock": s.name, "cuts": cuts_dict})
 
-        if not feasible:
-            print(f"No feasible pattern was found for {f.name}")
-            patterns = []
+            if not feasible:
+                print(f"No feasible pattern was found for {f.name}")
+                patterns = []
         return patterns
 
     def accept(self, v: AbstractRender):
